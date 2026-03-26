@@ -1,0 +1,14 @@
+curl -fsSL https://ollama.com/install.sh | sh
+ollama pull llama3.2:3b
+python3 -m pip install -U "huggingface_hub[cli]"
+mkdir -p ~/adapters-demo
+cd ~/adapters-demo
+hf download akshatladdha16/Llama-3.2-3B-Chemistry-Tutor-LoRA --local-dir ./Llama-3.2-3B-Chemistry-Tutor-LoRA
+cd ./Llama-3.2-3B-Chemistry-Tutor-LoRA
+ls -lh adapter_model.safetensors adapter_config.json
+cat > Modelfile <<'EOF'
+FROM llama3.2:3b
+ADAPTER .
+EOF
+ollama create llama3-chemistry -f Modelfile
+ollama run llama3-chemistry

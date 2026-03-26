@@ -1,0 +1,122 @@
+    1  sudo dnf install   https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm   https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    2  sudo dnf install akmod-nvidia
+    3  free -m
+    4  lscpu | less
+    5  lspci -k | less
+    6  cat /etc/os-release 
+    7  sudo -i
+    8  git clone https://github.com/ggerganov/llama.cpp.git
+    9  cd llama.cpp/
+   10  mkdir build
+   11  cd build
+   12  ls
+   13  cmake ..
+   14  curl 
+   15  sudo dnf update -y
+   16  sudo dnf install -y libcurl-devel
+   17  cmake ..
+   18  nproc
+   19  make -j$(nproc)
+   20  mkdir ~/models
+   21  cd ~/modeks
+   22  cd ~/models
+   23  wget https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q4_K_M.gguf -O mistral.Q4_K_M.gguf
+   24  cd ../llama.cpp/build/
+   25  ls
+   26  ./bin/llama-run ~/models/mistral.Q4_K_M.gguf "Explain what a black hole is in simple terms." -n 200 -t 28
+   27  time ./bin/llama-run ~/models/mistral.Q4_K_M.gguf "Give me a short history of Greenland in 2000 words." -n 200 -t 28
+   28  time ./bin/llama-run ~/models/mistral.Q4_K_M.gguf "Explain what a black hole is in simple terms." -n 200 -t 28
+   29  vim ~/test.txt
+   30  time ./bin/llama-run ~/models/mistral.Q4_K_M.gguf "Explain what a black hole is in simple terms." -n 200 -t 28 >> ~/test.txt
+   31  vim ~/test.txt
+   32  time ./bin/llama-run ~/models/mistral.Q4_K_M.gguf "Explain what a black hole is in simple terms." -n 200 -t 28 2>> ~/test.txt
+   33  vim ~/test.txt
+   34  cd
+   35  sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-cuda
+   36  sudo dnf install xorg-x11-drv-nvidia-cuda
+   37  sudo akmod --force
+   38  sudo dnf install akmod-nvidia
+   39  sudo dracut --force
+   40  sudo reboot
+   41  which curl
+   42  top
+   43  lspci -k
+   44  nvidia-smi
+   45  top
+   46  cd llama.cpp/
+   47  rm -rf build
+   48  mkdir build
+   49  cd build
+   50  cmake .. -DGGML_CUDA=on
+   51  nvcc -V
+   52  source /etc/bashrc
+   53  nvcc -V
+   54  cmake .. -DGGML_CUDA=on
+   55  make -j$(nproc)
+   56  time ./bin/llama-run --ngl 40 ~/models/mistral.Q4_K_M.gguf "Explain what a black hole is in simple terms" -n 128 -t 8
+   57  time ./bin/llama-run --ngl 40 ~/models/mistral.Q4_K_M.gguf "Write a short history of Greenland in 2000 words" -n 128 -t 8
+   58  time ./bin/llama-run --ngl 40 ~/models/mistral.Q4_K_M.gguf "Write a short history of Canada in 2000 words" -n 128 -t 8
+   59  time ./bin/llama-run --ngl 40 ~/models/mistral.Q4_K_M.gguf "Write a short history of Netherland in 2000 words" -n 128 -t 8
+   60  time ./bin/llama-run --ngl 40 ~/models/mistral.Q4_K_M.gguf "can you explain why on a 32 core system running a multi-threaded process entirely on all of these cores, I see a real time of 15 seconds and a user time of 4 minutes while using the linux time command." -n 128 -t 8
+   61  ./bin/llama-bench -m ~/models/mistral.Q4_K_M.gguf -n 128 -t 8 -ngl 40
+   62  cd
+   63  cd /proc/sys
+   64  ls
+   65  cd vm
+   66  ls
+   67  cat swappiness 
+   68  echo 120 > swappiness 
+   69  sudo -i
+   70  time ./bin/llama-run --ngl 40 ~/models/mistral.Q4_K_M.gguf "can you explain why on a 32 core system running a multi-threaded process entirely on all of these cores, I see a real time of 15 seconds and a user time of 4 minutes while using the linux time command." -n 128 -t 8
+   71  cd ~/llama.cpp/build/
+   72  time ./bin/llama-run --ngl 40 ~/models/mistral.Q4_K_M.gguf "can you explain why on a 32 core system running a multi-threaded process entirely on all of these cores, I see a real time of 15 seconds and a user time of 4 minutes while using the linux time command." -n 128 -t 8
+   73  free -m
+   74  sudo cpupower frequency-info 
+   75  sudo cpupower frequency-set -g performance
+   76  sudo cpupower frequency-info 
+   77  cd
+   78  sudo -i
+   79  git clone https://github.com/sandervanvugt/linai
+   80  cd linai/
+   81  ls
+   82  cat disable-thp.service 
+   83  sudo cp disable-thp.service /etc/systemd/system/
+   84  sudo systemctl daemon-reload
+   85  sudo systemctl enable --now disable-thp.service 
+   86  sudo less /usr/lib/tuned/profiles/latency-performance/tuned.conf 
+   87  sudo sh -c "echo 4096 > /proc/sys/vm/nr_hugepages"
+   88  grep -i huge /proc/meminfo
+   89  free -m
+   90  cd ../llama.cpp/build/
+   91  time ./bin/llama-run --ngl 40 ~/models/mistral.Q4_K_M.gguf "can you explain why on a 32 core system running a multi-threaded process entirely on all of these cores, I see a real time of 15 seconds and a user time of 4 minutes while using the linux time command." -n 128 -t 8
+   92  grep -i huge /proc/meminfo
+   93  powertop
+   94  sudo powertop
+   95  cd 
+   96  cd linai/
+   97  ls
+   98  cat cpupower.service 
+   99  sudo cp cpupower.service /etc/systemd/system/
+  100  sudo systemctl daemon-reload
+  101  sudo systemctl enable --now cpupower
+  102  history > /tmp/april25.txt
+ROOT COMMANDS
+    1  grep avx2 /proc/cpuinfo 
+    2  lspci -k
+    3  dnf install -y git gcc gcc-c++ cmake make python3 python3-pip hwloc htop wget unzip
+    4  exit
+    5  cd /proc/sys/vm
+    6  echo 120 > swappiness 
+    7  cat swappiness 
+    8  vim /etc/sysctl.d/99-sander.conf
+    9  exit
+   10  free -m
+   11  echo 3 > /proc/sys/vm/drop_caches 
+   12  free -m
+   13  exit
+   14  cat /sys/kernel/mm/transparent_hugepage/enabled 
+   15  echo never > /sys/kernel/mm/transparent_hugepage/enabled 
+   16  cat /sys/kernel/mm/transparent_hugepage/enabled 
+   17  exit
+   18  echo ROOT COMMANDS >> /tmp/april25.txt 
+   19  history >> /tmp/april25.txt 

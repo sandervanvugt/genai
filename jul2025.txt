@@ -1,0 +1,53 @@
+    1  lscpu
+    2  free -m
+    3  cat /etc/os-release 
+    4  grep avx2 /proc/cpuinfo 
+    5  dnf install -y git gcc gcc-c++ cmake make python3 python3-pip hwloc htop wget unzip
+    6  exit
+    7  tuned-adm list
+    8  ip a
+    9  dnf install openssh
+   10  systemctl enable --now sshd
+   11  lspci -k
+   12  ip a
+   13  mount | grep proc
+   14  cd /proc/sys/kernel/
+   15  ls
+   16  cat numa_balancing
+   17  echo 0 > numa_balancing
+   18  vim /etc/sysctl.d/numa.conf
+   19  cpu
+   20  reset
+   21  ls
+   22  cd
+   23  cpupower frequency-info 
+   24  cpupower frequency-set -g performance
+   25  free -m
+   26  cd /proc/sys/vm
+   27  cat swappiness 
+   28  cat vfs_cache_pressure 
+   29  echo 50 > vfs_cache_pressure 
+   30  cd /sys/kernel/mm/
+   31  ls
+   32   cd hugepages/
+   33  ls
+   34  cd ../transparent_hugepage/
+   35  ls
+   36  cat enabled 
+   37  echo never > enabled 
+   38  cat enabled 
+   39  exit
+   40  free -m
+   41  echo 4000 > /proc/sys/vm/nr_hugepages
+   42  free -m
+   43  sysctl -w vm.nr_hugepages=8000
+   44  less /proc/meminfo 
+   45  lsblk
+   46  lslbk
+   47  lsblk
+   48  mount
+   49  mount | grep '^/'
+   50  exit
+   51  dnf install -y powertop
+   52  powertop
+   53  history > /tmp/jul2025.txt
