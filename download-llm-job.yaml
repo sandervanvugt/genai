@@ -31,5 +31,5 @@ spec:
       volumes:
       - name: models
         persistentVolumeClaim:
-          claimName: models-pvc
+          claimName: nfs-llm-pvc
 
